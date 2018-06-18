@@ -593,7 +593,7 @@ def _read_edf_header(fname, annot, annotmap, exclude):
         hour, minute, sec = [int(x) for x in
                              re.findall(r'(\d+)', fid.read(8).decode())]
         century = 2000 if year < 50 else 1900
-        date = datetime.datetime(year + century, month, day, hour, minute, sec)
+        date = datetime.datetime(year + century, month, day, hour, minute + sec // 60, sec % 60)
 
         header_nbytes = int(fid.read(8).decode())
 
